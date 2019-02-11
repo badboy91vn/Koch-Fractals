@@ -52,7 +52,7 @@ public class KochGenerator : MonoBehaviour
     protected bool _useBezierCurves;
     [SerializeField]
     [Range(8, 24)]
-    protected int _bezierVertexCount;
+    protected int _bezierVertexCount = 8;
 
 
     protected int _generationCount;
@@ -175,6 +175,7 @@ public class KochGenerator : MonoBehaviour
         _generationCount++;
     }
 
+    public float _lengthOfSides;
     private void OnDrawGizmos()
     {
         GetInitiatorPoint();
@@ -200,6 +201,8 @@ public class KochGenerator : MonoBehaviour
                 Gizmos.DrawLine(_initiatorPoint[i], _initiatorPoint[0]);
             }
         }
+
+        _lengthOfSides = Vector3.Distance(_initiatorPoint[0], _initiatorPoint[1]) * 0.5f;
     }
 
     private void GetInitiatorPoint()
@@ -243,7 +246,7 @@ public class KochGenerator : MonoBehaviour
                 _rotateAxis = new Vector3(0, 0, 1);
                 break;
             case _axis.YAxis:
-                _rotateVector = new Vector3(0, 1, 1);
+                _rotateVector = new Vector3(0, 1, 0);
                 _rotateAxis = new Vector3(1, 0, 0);
                 break;
             case _axis.ZAxis:
@@ -255,17 +258,5 @@ public class KochGenerator : MonoBehaviour
                 _rotateAxis = new Vector3(1, 0, 0);
                 break;
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }
